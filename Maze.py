@@ -1,6 +1,9 @@
 import random
 
-type Vec2i = tuple[int, int]
+from collections import namedtuple
+from typing_extensions import NamedTuple
+
+Vec2i = NamedTuple("Vec2i", [("x", int), ("y",int)])
 
 class Maze:
     def __init__(self, width: int, height: int) -> None:
@@ -15,8 +18,21 @@ class Maze:
         self._cells[self.width * y + x] = value
 
     def tile_neighbors(self, x: int, y: int) -> list[Vec2i]:
+        ret : list[Vec2i]
         
-        if (x > 0)
+        if 0 < x:
+            ret.append(Vec2i(x - 1, y))
+
+        if x < self.width - 1:
+            ret.append(Vec2i(x + 1, y))
+
+        if 0 < y:
+            ret.append(Vec2i(x, y - 1))
+
+        if y < self.height - 1:
+            ret.append(Vec2i(x, y + 1))
+
+        return ret
 
     def generate(self):
         checks: set[Vec2i] = {}
